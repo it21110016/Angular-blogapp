@@ -1,6 +1,5 @@
-Project Name
-
 Project Name: AngularBlogApp Project
+
 Description: This project is a web application built using Angular for the front end and Node.js for the backend. It demonstrates the integration of these two technologies to create a dynamic and interactive web application.
 Table of Contents
 
