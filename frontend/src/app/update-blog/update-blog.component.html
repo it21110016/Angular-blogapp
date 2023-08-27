@@ -1,0 +1,26 @@
+<div class="container">
+
+  <h2>Update Blog</h2>
+
+  <form (ngSubmit)="updateBlog()">
+
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="blog.name" required>
+    </div>
+
+    <div>
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" [(ngModel)]="blog.author" required>
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" [(ngModel)]="blog.description" required></textarea>
+    </div>
+
+    <button type="submit">Update Blog</button>
+
+  </form>
+
+</div>
