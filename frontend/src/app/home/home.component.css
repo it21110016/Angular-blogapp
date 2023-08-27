@@ -1,0 +1,89 @@
+/* Center align the content */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style the search input */
+input[type="text"] {
+  width: 40%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style the blog table */
+table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+}
+
+th,
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Style the delete button */
+button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.update {
+  background-color: rgb(17, 122, 187);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view {
+  background-color: rgb(212, 195, 38);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view:hover {
+  background-color: rgb(128, 115, 7);
+}
+
+button:hover {
+  background-color: #d32f2f;
+}
+
+.update:hover {
+  background-color: rgb(6, 84, 133);
+}
+
+/* Style the add blog button */
+.add-blog-button {
+  background-color: #21f372;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-blog-button:hover {
+  background-color: #12c055;
+}

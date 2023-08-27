@@ -1,0 +1,31 @@
+<div class="container">
+
+  <h2>Blog App</h2>
+
+  <input type="text" [(ngModel)]="searchText" placeholder="Search by name" />
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>View</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let blog of blogs | filter: searchText">
+        <td>{{ blog.name }}</td>
+        <td><button class="view" (click)="navigateToView(blog._id)">View</button></td>
+        <td><button class="update" (click)="navigateToUpdate(blog._id)">Update</button></td>
+        <td><button (click)="deleteBlog(blog._id)">Delete</button></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <button class="add-blog-button" routerLink="/add-blog">Add Blog</button>
+
+</div>
