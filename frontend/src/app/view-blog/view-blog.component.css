@@ -1,0 +1,23 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.blog-info {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.value {
+  margin: 0;
+}
