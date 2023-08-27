@@ -1,0 +1,30 @@
+<div class="container">
+
+  <h2>Add Blog</h2>
+
+  <form #blogForm="ngForm" (ngSubmit)="submitForm(blogForm.value)">
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input ngModel id="name" #name="ngModel" type="text" name="name" class="form-control" required="true">
+      <div class="error-message" *ngIf="name.touched && !name.valid">Name is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input required ngModel id="author" #author="ngModel" type="text" name="author" class="form-control">
+      <div class="error-message" *ngIf="author.touched && !author.valid">Author is required</div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea ngModel id="description" #description="ngModel" name="description" class="form-control"
+        required></textarea>
+      <div class="error-message" *ngIf="description.touched && !description.valid">Description is required</div>
+    </div>
+
+    <button type="submit">Add Blog</button>
+
+  </form>
+
+</div>
