@@ -4,6 +4,15 @@ const User = require('../models/user');
 // import jwt module
 const jwt = require('jsonwebtoken');
 
+const { OAuth2Client } = require('google-auth-library');
+
+// Initialize the OAuth2 client with your Google OAuth 2.0 client ID and client secret
+const client = new OAuth2Client({
+  clientId: '87702682850-o2vvulmvnn5tmc6mdckf3pq3o92i6bhg.apps.googleusercontent.com',
+  clientSecret: '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',
+});
+
+
 // method to add a new user
 const signUp = async (req, res) => {
 
@@ -97,4 +106,36 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signUp, login, getAllusers };
+const gLogin = async (req, res) => {
+  try {
+    // Get the Google ID token from the request body
+    const { googleIdToken } = req.body;
+
+    // Verify the Google ID token using the initialized OAuth2 client
+    const ticket = await client.verifyIdToken({
+      idToken: googleIdToken,
+      audience: '87702682850-o2vvulmvnn5tmc6mdckf3pq3o92i6bhg.apps.googleusercontent.com', // Replace with your actual client ID
+    });
+
+    // Get the payload from the verified Google ID token
+    const payload = ticket.getPayload();
+
+    // You can now use the `payload` data to identify the user and generate a JWT token
+    const userId = payload.sub;
+
+    // Generate a JWT token (you should use a proper library like `jsonwebtoken`)
+    const token = jwt.sign({ userId }, 'your-secret-key', {
+      expiresIn: '1h', // Token expiration time
+    });
+
+    // Send the JWT token as the response
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+
+module.exports = { signUp, login, getAllusers, gLogin };
