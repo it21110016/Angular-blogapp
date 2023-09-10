@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { GoogleLoginComponent } from './google-login/google-login.component';
 
 // const appRoutes: Routes = [
 //   { path: '', component: HomeComponent },
@@ -35,7 +36,8 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     NavbarComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    GoogleLoginComponent
   ],
   imports: [
     BrowserModule,
