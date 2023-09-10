@@ -22,11 +22,20 @@ export class AuthGuard {
         if (isAuthenticated) {
           return true; // Allow access to the route
         } else {
-          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-          return false;
+          // Check if there's a token in local storage
+          const token = localStorage.getItem('token');
+          if (token) {
+            // Set isAuthenticated if token exists
+            this.authService.isAuthenticatedSubject.next(true);
+            return true;
+          } else {
+            // Redirect to login if neither isAuthenticated nor token exists
+            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+            return false;
+          }
         }
       })
     );
-  }
+  }  
 
 }

@@ -13,7 +13,7 @@ export class AuthService {
   // private baseUrl = 'https://blog-app-6vki.onrender.com/api/v1/users';
   private baseUrl = 'http://localhost:5000/api/v1/users';
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+   isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {
     this.checkToken();
@@ -53,6 +53,60 @@ export class AuthService {
     );
   }
 
+  async handleCredentialResponse(response: any) {
+    // Here will be your response from Google.
+    // console.log(response);
+  
+    // Check if the response contains the user's information (you may need to adjust this based on the response format)
+    if (response) {
+      const googleIdToken = response.credential;
+  
+      // Send the Google ID token to your server for verification and token generation
+      try {
+        const tokenResponse: any = await this.http.post(
+          `${this.baseUrl}/glogin`, // Replace with your server's endpoint for token generation
+          { googleIdToken } // Send the Google ID token in the request body
+        ).toPromise();
+
+        // Check if the server responded with a valid token
+        if (tokenResponse && tokenResponse.token) {
+          // Store the token locally (e.g., in local storage)
+          localStorage.setItem('token', tokenResponse.token);
+  
+          // Update your application's authentication state
+          this.isAuthenticatedSubject.next(true);
+  
+          // Redirect the user or perform any other actions as needed
+          this.router.navigate(['/']); // Navigate to the home page
+        } else {
+          // Handle the case where the server did not provide a valid token
+          console.error('Invalid token received from the server');
+        }
+      } catch (error) {
+        // Handle any errors that occurred during the token generation process
+        console.error('Error generating or receiving token:', error);
+      }
+    }
+  }
+
+  async handleGoogleLogin(googleIdToken: string): Promise<void> {
+    try {
+      const tokenResponse: any = await this.http.post(
+        `${this.baseUrl}/glogin`,
+        { googleIdToken }
+      ).toPromise();
+  
+      if (tokenResponse && tokenResponse.token) {
+        localStorage.setItem('token', tokenResponse.token);
+        this.isAuthenticatedSubject.next(true);
+      } else {
+        console.error('Invalid token received from the server');
+      }
+    } catch (error) {
+      console.error('Error generating or receiving token:', error);
+    }
+  }  
+
   logout(): void {
     localStorage.removeItem('token');
     this.isAuthenticatedSubject.next(false);
@@ -67,7 +121,7 @@ export class AuthService {
       try {
         const headers = new HttpHeaders({ 'Authorization': `${token}` });
 
-        const response = await this.http.get(`${this.baseUrl}/verify-token`, { headers }).toPromise();
+        const response = await this.http.get(`${this.baseUrl}`, { headers }).toPromise();
         if (response) {
           this.isAuthenticatedSubject.next(true);
         } else {
