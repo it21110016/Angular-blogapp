@@ -1,5 +1,5 @@
 // import user controller to use its methods
-const { signUp, login, getAllusers } = require('../controllers/authController');
+const { signUp, login, getAllusers, gLogin } = require('../controllers/authController');
 
 const express = require('express');
 
@@ -14,5 +14,8 @@ router.post('/login', login);
 
 //handle GET rquest at "/signup" uri
 router.get('/signup', getAllusers);
+
+//handle POST rquest at "/glogin" uri
+router.post('/glogin', gLogin);
 
 module.exports = router;
